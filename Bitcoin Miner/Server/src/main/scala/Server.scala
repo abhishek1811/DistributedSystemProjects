@@ -86,11 +86,11 @@ case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinM
       val sha = MessageDigest.getInstance("sha-256")
       // generate all hash strings b/w a parametrized set.
       for(i <- from to end - 1) {
-	      // generates all the hex string, foldleft is curried function used on sha list
-	      var hexstring = sha.digest(("n.sadhwani" + i.toString()).getBytes).foldLeft("")((s: String, b: Byte) => s +
-         Character.forDigit((b & 0xf0) >> 4, 16) + Character.forDigit(b & 0x0f, 16))
-	      // select all the hash strings which starts with required pattern and update coincounter as it.
-	      if(hexstring.startsWith(pattern)){
+        // generates all the hex string, foldleft is curried function used on sha list
+        var hexstring = sha.digest(("n.sadhwani" + i.toString()).getBytes).foldLeft("")((s: String, b: Byte)
+         => s + Character.forDigit((b & 0xf0) >> 4, 16) + Character.forDigit(b & 0x0f, 16))
+        // select all the hash strings which starts with required pattern and update coincounter as it.
+        if(hexstring.startsWith(pattern)){
           hashstrings += "n.sadhwani" + i + " " + hexstring + "\n"
           coincounter +=1
           println(hashstrings)
