@@ -6,11 +6,18 @@ import akka.event.LoggingAdapter
 import java.security.MessageDigest
 import akka.routing.RoundRobinRouter
 
-case object Start
+sealed trait ProjectOneMessage
+case object Ready
+case object FindBitcoin 
+case class Over (terminate : Int) extends ProjectOneMessage
+case class Done (shaDone : Int, hashstrings :String) extends ProjectOneMessage
+case class Work (from : Int , end : Int , leadingZeroes : Int) extends ProjectOneMessage
+case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int)extends ProjectOneMessage
+case object Start 
 case object Send
-case class msgint(msg:Int)
-case class exchange(msg: Int)
-case class Message(msg: String)
+case class msgint(msg:Int)extends ProjectOneMessage
+case class exchange(msg: Int)extends ProjectOneMessage
+case class Message(msg: String)extends ProjectOneMessage
 
 object Client extends App {
 
@@ -20,12 +27,7 @@ object Client extends App {
   System.setProperty("java.net.preferIPv4Stack", "true")
   val listener =system.actorOf(Props[Listener], name = "Listener")
   val terminator = system.actorOf(Props[Terminator], name = "terminator")
-  case object Ready   
-	sealed trait ProjectOneMessage
-	case object FindBitcoin extends ProjectOneMessage
-  case class Over (terminate : Int)
-  case class Done (shaDone : Int, hashstrings :String) extends ProjectOneMessage
-  case class Work (from : Int , end : Int , leadingZeroes : Int) extends ProjectOneMessage
+
 
 	var from=0
   var end=0
@@ -135,7 +137,9 @@ object Client extends App {
     var counter=0
 
     def receive= {
-
+      case getWork(noOfWorkers,from,end,zeroes) =>
+        println("accccccccccccc")
+        findBitcoin( noOfWorkers , from , end , zeroes)
       case msg: Int=> 
         println("Receiving Input From Master")
         if(counter==0){

@@ -1,4 +1,5 @@
 import akka.actor._
+
 import scala.util.Random
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit
@@ -76,6 +77,7 @@ object Client {
 	  	var userid:Int=myid
 	  	var tweetbank1=new Array[String](100)
 	  	//val master = context.actorFor("akka://ServerSystem@"+args(0)+":6565/user/master")
+	  	//val serverworker=context.actorFor("akka://Twitter@"+"172.16.102.138"+":8787/user/serverworker")
 	  	def readmyfile()={
 	  		//var messages = new Array[String](100)
  			var i=0
@@ -84,7 +86,7 @@ object Client {
   				tweetbank1(i) = line
   				i+=1
 	  		}
-	  		//return messages
+	  		
 	  	}	
 	  	def receive={
 	  		case "Ready"=>{
@@ -98,11 +100,13 @@ object Client {
 	  		}
 
 	  	}
+
+
 	}
 	object Global{
 		var tweetbank=new Array[String](100)
 		var i=0
- 		val filename = "/Users/Abhishek/Desktop/Twitter/myfile.txt"
+ 		val filename = "/Users/Abhishek/Desktop/Twitter Version2/myfile.txt"
  		for (line <- scala.io.Source.fromFile(filename).getLines()) {
   			tweetbank(i) = line
   			i+=1

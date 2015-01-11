@@ -1,4 +1,5 @@
 import akka.actor._
+
 import scala.util.Random
 import scala.concurrent.duration._
 import java.util.concurrent.TimeUnit
@@ -18,19 +19,19 @@ object Server {
 
   def main(args: Array[String]): Unit = {
     if(args.length!=3){
-		println("-------------------Invalid Input-----------------\nThe command line input for this program is as follow:\n scala Project4  scalingfactor #ofserveractor ClientMachine");
-	 	System.exit(0) 
-	}
-	val sf=args(0).toInt
-	val s_actors=((Runtime.getRuntime().availableProcessors())*1.5).toInt
-	val maxclients=args(2).toInt// equal to watingcounter
-	println(" Scaling Factor: "+sf+"\n Max Server Actors: "+s_actors+"\n Max Client Machine: "+maxclients)
-	val config = ConfigFactory.parseString("akka.remote.netty.tcp.port=8787").withFallback(ConfigFactory.load()).resolve
-	var system=ActorSystem("Twitter",config)
-	System.setProperty("java.net.preferIPv4Stack", "true")
-	var servermaster=system.actorOf(Props(new ServerMaster(maxclients,s_actors)),name="servermaster")
-	println(servermaster.path)
-	servermaster ! "Initiate"
+  		println("-------------------Invalid Input-----------------\nThe command line input for this program is as follow:\n scala Project4  scalingfactor #ofserveractor ClientMachine");
+  	 	System.exit(0) 
+	  }
+  	val sf=args(0).toInt
+  	val s_actors=((Runtime.getRuntime().availableProcessors())*1.5).toInt
+  	val maxclients=args(2).toInt// equal to watingcounter
+  	println(" Scaling Factor: "+sf+"\n Max Server Actors: "+s_actors+"\n Max Client Machine: "+maxclients)
+  	val config = ConfigFactory.parseString("akka.remote.netty.tcp.port=8787").withFallback(ConfigFactory.load()).resolve
+  	var system=ActorSystem("Twitter",config)
+  	System.setProperty("java.net.preferIPv4Stack", "true")
+  	var servermaster=system.actorOf(Props(new ServerMaster(maxclients,s_actors)),name="servermaster")
+  	println(servermaster.path)
+  	servermaster ! "Initiate"
 	
   }
   class ServerMaster(maxclients:Int,s_actors:Int) extends Actor{
@@ -62,6 +63,7 @@ object Server {
 
   	def relations()={
   		var nooffollowers=Array(3,9,19,36,61,98,154,246,458,819,978,1211,1675,2991,24964)
+      //var nooffollowers=Array()
   		var stats=assignStats()
   		var count=0
   		var from =0
@@ -76,7 +78,7 @@ object Server {
   			println(t+". Creating :"+i)
   			if(i>stats(count)){
   				if(count>=14)
-  				till=50000
+  				  till=50000
   				else{
   					from=till
   					count=count+1
@@ -86,11 +88,10 @@ object Server {
   			
   			if(i<=stats(count)||(till==50000)){// boundary case && zero followers
   				val range=from to till
-  				var rand=range(r.nextInt(range.length))
+  				var rand=range(r.nextInt(range.length))// apni id bhi tog utha sakta hai and fix if rand in already in set then what.
   				for(j<-0 to rand-1){//zero followers
   					randomfound=r.nextInt(totalusers)
-  					Global.user(i).followers+=randomfound
-  					//println (i+"-->"+user(i).followers.) 
+  					Global.user(i).followers+=randomfound 
   					Global.user(randomfound).following+=Global.user(i).userid
   				}
   			
@@ -108,7 +109,7 @@ object Server {
         serverworker ! tweeting(myaddress,myuserid,message)
 
       }
-  		case create(maxID) =>{
+  		case create(maxID) =>{// what about when maxid is not same for all machine
   			totalusers=maxclients*maxID
   			if(waiting <=maxclients){
   				endid+=maxID
@@ -132,18 +133,21 @@ object Server {
   					tempend+=maxID
   					clientref(i) ! AssignIDS(tempst,tempend)
   				}	
-  				for(i<-0 to Global.user.size-1)
-  				println (i+" <*------*> "+Global.user(i).followers.size) 
-  				//println("*********************")
+  				for(i<-0 to Global.user.size-1){
+           println("----------------------------------------------------------------------------------------------------")
+    				println ("ID:"+i+"\nFollowers: "+ Global.user(i).followers.size+"\nFollowing: "+Global.user(i).following.size) 
+            
+            println("----------------------------------------------------------------------------------------------------")
+          }
           context.system.scheduler.scheduleOnce(60.seconds){
-            for(i<- 0 to Global.user.size-1){
+            /*for(i<- 0 to Global.user.size-1){
                 println("userid " +i+"\n---------------------------")
 
                 for(j<-0 to Global.user(i).tweets.size-1){
                   println(Global.user(i).tweets(j))
                 }
                 println("\n---------------------------")
-            }
+            }*/
             println("Message Processed in 60 sec: "+Global.messageprocessed/60)
             context.system.shutdown
           }
