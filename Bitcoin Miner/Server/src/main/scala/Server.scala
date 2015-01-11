@@ -1,4 +1,8 @@
-//learning process
+/*
+ * Author : Abhishek Singh Panesar, Nishit Sadhwani
+ * Date : 09/15/14
+ * Title: Server code implemenatation of Bitcoin Miner
+ */
 package server
 import akka.actor._
 import akka.event.Logging
