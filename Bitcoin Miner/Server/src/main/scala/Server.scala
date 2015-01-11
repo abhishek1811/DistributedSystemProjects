@@ -1,25 +1,25 @@
 //learning process
 package server
 import akka.actor._
-import akka.routing.RoundRobinRouter
-import java.security.MessageDigest
 import akka.event.Logging
 import akka.event.LoggingAdapter
-import common._
+import java.security.MessageDigest
+import akka.routing.RoundRobinRouter
 
 // Messages used for communication between Server and Client.
 sealed trait BitcoinMessages
-case object Start extends BitcoinMessages
 case object Send extends BitcoinMessages
+case object Start extends BitcoinMessages
+case object FindBitcoin extends BitcoinMessages 
 case class msgint(msg:Int) extends BitcoinMessages
-case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinMessages
+case class collect(x:String) extends BitcoinMessages
 case class exchange(msg: Int) extends BitcoinMessages 
 case class Message(msg: String) extends BitcoinMessages
-case class collect(x:String) extends BitcoinMessages
-case class Over (terminate : Int) extends BitcoinMessages
-case object FindBitcoin extends BitcoinMessages 
 case class Done (shaDone : Int) extends BitcoinMessages
+case class Over (terminate : Int) extends BitcoinMessages
 case class Work (from : Int , end : Int , leadingZeroes : Int) extends BitcoinMessages
+case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinMessages
+
 
 /* 
  *  Main object of the the code which takes arguments for user and initiate the mining of bitcoins.
@@ -52,11 +52,9 @@ case class Work (from : Int , end : Int , leadingZeroes : Int) extends BitcoinMe
     else
     numberOfZeros = argument.toInt
   }
-
   assign(argument)
   // defining the actor system and actors used in the code.
   val system = ActorSystem("ServerSystem")
-  //val terminators = system.actorOf(Props[Terminator], name = "terminators")
   val s_actors = ((Runtime.getRuntime().availableProcessors()) * 1.5).toInt
   val master = system.actorOf(Props(new Master(s_actors,bitcoinRange,numberOfZeros)),name = "master") 
   println(master.path)
@@ -67,7 +65,7 @@ case class Work (from : Int , end : Int , leadingZeroes : Int) extends BitcoinMe
    *  class are defined in Master class. Each worker actor is assigned a chunk to mine required Bitcoins.
    */
   class Worker extends Actor {
-
+    
     // generates pattern according to numberOfZeros and returns the pattern created.
     def createPattern(max:Int)={  
       var pattern = ""
@@ -101,6 +99,7 @@ case class Work (from : Int , end : Int , leadingZeroes : Int) extends BitcoinMe
       } 
       Done(coincounter)
     }
+
     def receive = {
       /*
        * Message that accepts assigned chunk to for each worker and reply sender with information of number of chunks
