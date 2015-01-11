@@ -20,7 +20,6 @@ case class Over (terminate : Int) extends BitcoinMessages
 case class Work (from : Int , end : Int , leadingZeroes : Int) extends BitcoinMessages
 case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinMessages
 
-
 /* 
  *  Main object of the the code which takes arguments for user and initiate the mining of bitcoins.
  *  As command line argument,it takes the number of zeroes that should be in the required bitcoins. 
@@ -131,7 +130,7 @@ case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinM
     val workerRouter = context.actorOf(Props[Worker].withRouter(RoundRobinRouter(noOfWorkers)), name = "workerRouter")
 
     def receive = {
-    	// sends information respective clients.
+      // sends information respective clients.
       case "Ready" => 	
         println ("I am sending")
         //sender ! getWork(clientworker,clientChunkFrom,clientChunkEnd,leadingZeroes)
@@ -149,7 +148,7 @@ case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinM
         for (i <-1 until numberOfChunks){
           workerRouter ! Work((i-1) * 10000, i * 10000, numberOfZeros)	
         }
-	    /*
+      /*
        * Checks if all chunks are processed or not. Once all chunks are processed it prints
        * the total number of bitcoins processed by Server and Client.At end terminates the 
        * server with system shutdown.
@@ -158,8 +157,7 @@ case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinM
         chunkCounter += 1
         if(chunkCounter == numberOfChunks){
          println("Total Bit Coins Mined :" + (shaDone+clientBitcoins) + "\n Terminating..........")
-         context.system.shutdown()
-  		    //context.stop(self)		
+         context.system.shutdown()		
         }
       // print the strings accepted from client
       case msg: String => 
