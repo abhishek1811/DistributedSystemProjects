@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="client."
+		module="client."
+		revision="1.0"
+		extra-sbtVersion="0.12"
+		extra-scalaVersion="2.11"
+		conf="runtime-internal"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom"
+		date="20141216125531"/>
+	<dependencies>
+		<module organisation="com.eed3si9n" name="sbt-assembly">
+			<revision name="0.10.1" error="not found" extra-sbtVersion="0.12" extra-scalaVersion="2.11" downloaded="false" searched="false" conf="default(compile)" position="-1">
+				<caller organisation="client." name="client." conf="optional, compile, runtime, runtime-internal" rev="0.10.1" rev-constraint-default="0.10.1" rev-constraint-dynamic="0.10.1" callerrev="1.0" extra-sbtVersion="0.12" extra-scalaVersion="2.11"/>
+				<artifacts>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>
