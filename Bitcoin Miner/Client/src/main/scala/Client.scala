@@ -5,6 +5,7 @@
  */
 package client
 import akka.actor._
+import common._
 import akka.event.Logging
 import akka.event.LoggingAdapter
 import java.security.MessageDigest
@@ -16,12 +17,12 @@ case object FindBitcoin
 case class Over (terminate : Int) extends ProjectOneMessage
 case class Done (shaDone : Int, hashstrings :String) extends ProjectOneMessage
 case class Work (from : Int , end : Int , leadingZeroes : Int) extends ProjectOneMessage
-case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends ProjectOneMessage
+case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int)extends ProjectOneMessage
 case object Start 
 case object Send
-case class msgint(msg:Int) extends ProjectOneMessage
-case class exchange(msg: Int) extends ProjectOneMessage
-case class Message(msg: String) extends ProjectOneMessage
+case class msgint(msg:Int)extends ProjectOneMessage
+case class exchange(msg: Int)extends ProjectOneMessage
+case class Message(msg: String)extends ProjectOneMessage
 
 object Client extends App {
 
@@ -31,6 +32,7 @@ object Client extends App {
   System.setProperty("java.net.preferIPv4Stack", "true")
   val listener =system.actorOf(Props[Listener], name = "Listener")
   val terminator = system.actorOf(Props[Terminator], name = "terminator")
+
 
 	var from=0
   var end=0
