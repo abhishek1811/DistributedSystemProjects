@@ -1,0 +1,89 @@
+compile
+run 
+run 1 1 60
+exit
+compile
+exit
+compile
+exit
+run 192.168.59.3 1 Event
+compile
+run 192.168.0.26 1 Event
+compile
+run 192.168.0.26 1 Event
+compile
+run 192.168.0.26 1 Event
+compile
+run 192.168.0.26 1 Event
+compile
+run 192.168.0.26 1 Event
+compile
+run 192.168.1.3 1 Event
+compile
+run 192.168.1.3 1 Event
+compile
+run 192.168.1.3 1 Event
+run 192.168.1.3 100 Event
+run 192.168.1.3 10 Event
+run 192.168.1.3 1 Event
+run 192.168.1.3 10 Event
+compile
+run 192.168.1.3 5 Event
+compile
+run 192.168.1.3 5 Event
+compile
+run 192.168.1.3 5 Event
+compile
+run 192.168.1.3 5 Event
+compile
+run 192.168.1.3 1 Event
+compile
+run 172.16.102.138 1 Event
+run 172.16.102.138 1 Event 172.16.102.138
+run 172.16.102.138 2 Event 172.16.102.138
+compile
+run 172.16.102.138 2 Event 172.16.102.138
+run 172.16.102.138 3 Event 172.16.102.138
+compile
+run 172.16.102.138 3 Event 172.16.102.138
+compile
+run 172.16.102.138 3 Event 172.16.102.138
+run 172.16.102.138 2 Event 172.16.102.138
+run 172.16.102.138 1 Event 172.16.102.138
+run 172.16.102.138 3 Event 172.16.102.138
+run 172.16.102.138 4 Event 172.16.102.138
+run 172.16.102.138 1 Regular 172.16.102.138
+run 172.16.102.138 2 Regular 172.16.102.138
+run 172.16.102.138 3 Regular 172.16.102.138
+run 172.16.102.138 4 Regular 172.16.102.138
+compile
+run 169.254.210.233 Regular 169.254.210.233 
+run 169.254.210.233 3 Regular 169.254.210.233 
+compile
+run 169.254.247.255 3 Regular 169.254.247.255 
+run 169.254.210.233 3 Regular 169.254.210.233 
+run 169.254.247.255 3 Regular 169.254.247.255 
+run 169.254.247.255 8 Regular 169.254.247.255 
+run 169.254.247.255 8 Event 169.254.247.255 
+run 169.254.247.255 5 Event 169.254.247.255 
+sbt
+compile
+java -cp target/Client.jar main.scala.Client
+java -cp target/Client-assembly-X.Y.jar scala.main.Client
+java-cp target/Client-assembly-X.Y.jar scala.main.Client
+java-cptarget/Client-assembly-X.Y.jar scala.main.Client
+comple
+compile
+run 10.136.28.21 5 Event 10.136.28.21 
+run 172.16.102.138 5 Event 172.16.102.138 
+run 172.16.102.138 5 Regular 172.16.102.138 
+run 172.16.102.138 5 Event 172.16.102.138 
+complile
+compile
+run 172.16.102.138 5 Event
+run 172.16.102.138 3 Event
+compile
+run 172.16.102.138 2 Regular 172.16.102.138
+compile
+run 172.16.102.138 2 Regular
+run 172.16.102.138 2 Event

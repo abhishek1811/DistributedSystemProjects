@@ -1,0 +1,98 @@
+compile
+run 
+run 1 1 60
+exit
+compile
+exit
+compile
+exit
+run 1 1 60
+exit
+run 1 1 60
+compile
+run 1 1 60
+sbt
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+compile
+run 1 1 60
+exit
+compile
+run 1 1 60
+compile
+run 1 1 60
+run 100 1 60
+compile
+run 10 1 60
+sbt
+compile
+run 10 1 60
+run 1 1 60
+run 10 1 60
+run 5 1 60
+sbt
+compile
+run 5 1 60
+compile
+run 5 1 60
+run 1 1 60
+compile
+run 1 1 60
+run 3 1 60
+compile
+run 3 1 60
+compile
+run 1 1 60
+run 2 1 60
+run 1 1 60
+run 3 1 60
+run 4 1 60
+run 1 1 60
+run 2 1 60
+run 3 1 60
+run 4 1 60
+compile
+run 3 1 60
+compile
+exit
+compile
+run 3 1 60
+edxig
+exit
+run 3 1 60
+run 8 1 60
+run 5 1 60
+compile
+sbt assembly
+sbt package
+exit
+compile
+run 3 1 60
+compile
+run 3 1 60
+exit
+run 3 1 60
+compile
+run 3 1 60
+compile
+run 2 1 60

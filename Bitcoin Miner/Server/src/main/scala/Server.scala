@@ -28,7 +28,7 @@ case class getWork(noOfWorkers:Int,from:Int,end:Int,zeroes:Int) extends BitcoinM
  *  Main object of the the code which takes arguments for user and initiate the mining of bitcoins.
  *  As command line argument,it takes the number of zeroes that should be in the required bitcoins. 
  */
- object Server extends App {
+object Server extends App {
 
   // Global variables contains number of bitcoins mined throughout the mining. Increases when new bitcoin found.
   var coincounter = 0
