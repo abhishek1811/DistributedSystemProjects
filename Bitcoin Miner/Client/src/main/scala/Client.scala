@@ -1,3 +1,8 @@
+/*
+ * Author : Abhishek Singh Panesar, Nishit Sadhwani
+ * Date : 09/15/14
+ * Title: Client code implemenatation of Bitcoin Miner
+ */
 package client
 import akka.actor._
 import akka.event.Logging
